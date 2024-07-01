@@ -9,7 +9,8 @@ app.set("trust proxy", true);
 app.use(cors());
 
 // Define a route
-app.get("/", async (req, res) => {
+app.get("/api/hello", async (req, res) => {
+  const visitorName = req.query.visitor_name;
   const ipAddress = req.ip;
   const weatherApiKey = "986ff9178702426d863182145240107";
 
@@ -22,10 +23,9 @@ app.get("/", async (req, res) => {
   const weatherResponse = await axios.get(weatherUrl);
 
   res.json({
-    message: "Hello World",
-    ip: ipAddress,
-    location: locationResponse.data,
-    weather: weatherResponse.data,
+    client_ip: ipAddress,
+    location: locationResponse.data.city,
+    greeting: `Hello, ${visitorName}!, the temperature is ${weatherResponse.data.current.temp_c} degrees Celsius in ${locationResponse.data.city}`,
   });
 });
 
