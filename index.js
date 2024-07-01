@@ -8,7 +8,12 @@ const port = 3000;
 app.set("trust proxy", true);
 app.use(cors());
 
-// Define a route
+//welcome route
+app.get("/", (req, res) => {
+  res.json({ message: "Hello World" });
+});
+
+// /api/hello?visitor_name=""
 app.get("/api/hello", async (req, res) => {
   const visitorName = req.query.visitor_name;
   const ipAddress = req.ip;
