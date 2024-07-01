@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
+require("dotenv").config();
 
 const app = express();
 const port = 3000;
@@ -18,7 +19,7 @@ app.get("/api/hello", async (req, res) => {
   try {
     const visitorName = req.query.visitor_name;
     const ipAddress = req.ip;
-    const weatherApiKey = "986ff9178702426d863182145240107";
+    const weatherApiKey = process.env.WEATHER_API_KEY;
 
     // Fetch IP location using WeatherAPI
     const locationUrl = `http://api.weatherapi.com/v1/ip.json?key=${weatherApiKey}&q=${ipAddress}`;
